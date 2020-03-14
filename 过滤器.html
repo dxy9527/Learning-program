@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<!-- 使用方法 -->
+		<!-- 在双花括号中 -->
+		<div>{{数据属性名称 | 过滤器名称}}</div>
+		<div>{{数据属性名称 | 过滤器名称(参数值)}}</div>
+		
+		<!-- 在 `v-bind` 中 -->
+		<div v-bind:id="数据属性名称 | 过滤器名称"></div>
+		<div v-bind:id="数据属性名称 | 过滤器名称(参数值)"></div>
+		
+		
+		
+		<div id="app">
+		
+		    <!--过滤器接收多个参数-->
+		    <span>{{value1|multiple(value2,value3)}}</span>
+		
+		</div>
+		
+		<!-- 
+		
+		多参数产地方式 
+		 <span>{{value1|multiple(value2,value3)}}</span>
+		 
+		  filters: {
+		         'multiple': function (value1, value2, value3) {
+		           return value1*value2*value3
+		         }
+		       }
+		-->
+		
+		
+		
+		<script type="text/javascript">
+			
+			//全局过滤器
+			
+			// Vue.filter('过滤器名称', function (value1[,value2,...] ) {  	
+			// 逻辑代码
+			// })
+			
+			//局部过滤器
+			// new Vue({       
+			//  filters: {      
+			//     '过滤器名称': function (value1[,value2,...] ) { 
+			//        // 逻辑代码     
+			//       } 
+			//          }    
+			// 　　})
+			
+			var vm = new Vue(
+			    {
+			      el: '#app',
+			      data: {
+			        msg: 'hello',
+			        value1:10,
+			        value2:20,
+			        value3:30
+			      },
+			    //局部过滤器
+			      filters: {
+			        'multiple': function (value1, value2, value3) {
+			          return value1*value2*value3
+			        }
+			      }
+			
+			    }
+			  )
+
+			
+		</script>
+	</body>
+</html>

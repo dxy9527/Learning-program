@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>hello vue</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{message}}
+			<br/>
+			<input type="text" v-model="message" />
+			<!--v-model 双向绑定-->
+			
+			<!--模板使用  父传子作用域插槽  与 具名插槽 -->
+			<mb :content= message >
+				<h3 slot='header'>{{header}}</h3>
+			</mb>
+			
+		</div>
+		<script type="text/javascript">
+			
+			//定义一个模板 extend组件构建器
+			
+			var mb = Vue.extend({
+				props:['content'],
+				template:`
+				<h1>{{content}}
+				<slot name='header'></slot>
+				</h1>
+				
+				`
+			})
+			
+			//挂模板 component 组件注册器
+			
+			Vue.component('mb', mb)
+			
+			var vm = new Vue({
+				el:'#app',
+				data(){
+					return {
+						message:'hello vue~!',
+						header:'this is header!'
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

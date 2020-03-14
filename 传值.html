@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<!--子传父-->
+		<div id="emit-example-simple">
+		  <welcome-button v-on:welcome="sayHi"></welcome-button>
+		</div>
+		
+		<script type="text/javascript">
+			
+		//定义模板	
+		Vue.component('welcome-button', {			
+		  template: `
+		    <button v-on:click="$emit('welcome')">
+		      Click me to be welcomed
+		    </button>
+		  `
+		})
+		
+		new Vue({
+		  el: '#emit-example-simple',
+		  methods: {
+		    sayHi: function () {
+		      alert('Hi!')
+		    }
+		  }
+		})
+		</script>
+		
+		<!--父传子用 props-->
+		
+		<!--兄弟之间用发布订阅
+			pabsub.js
+			
+			publish(事件，参数) 发布
+			subscribe(时间 ,处理函数)订阅
+			深度监视，监视数据内部对象的值发生改变，从而计算。
+			
+			网上可查询
+			
+		-->
+		
+		
+	</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+		
+		<div id="app">
+		  <h1>Hello App!</h1>
+		  <p>
+		    <!-- 使用 router-link 组件来导航. -->
+		    <!-- 通过传入 `to` 属性指定链接. -->
+		    <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+		    <router-link to="/foo">Go to Foo</router-link>
+		    <router-link to="/bar">Go to Bar</router-link>
+		  </p>
+		  <!-- 路由出口 -->
+		  <!-- 路由匹配到的组件将渲染在这里 -->
+		  <router-view></router-view>
+		</div>
+		
+		
+		<script>
+			// 0. 如果使用模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)
+			
+			// 1. 定义 (路由) 组件。
+			// 可以从其他文件 import 进来
+			const Foo = { template: '<div>foo</div>' }
+			const Bar = { template: '<div>bar</div>' }
+			
+			// 2. 定义路由
+			// 每个路由应该映射一个组件。 其中"component" 可以是
+			// 通过 Vue.extend() 创建的组件构造器，
+			// 或者，只是一个组件配置对象。
+			// 我们晚点再讨论嵌套路由。
+			const routes = [
+			  { path: '/foo', component: Foo },
+			  { path: '/bar', component: Bar }
+			]
+			
+			// 3. 创建 router 实例，然后传 `routes` 配置
+			// 你还可以传别的配置参数, 不过先这么简单着吧。
+			const router = new VueRouter({
+			  routes // (缩写) 相当于 routes: routes
+			})
+			
+			// 4. 创建和挂载根实例。
+			// 记得要通过 router 配置参数注入路由，
+			// 从而让整个应用都有路由功能
+			const app = new Vue({
+			  router,
+			  created(){
+				  console.log(this.$route)
+				  console.log(this.$route.path)
+				  console.log(this.$route.params)
+				  console.log(this.$route.query)
+				  console.log(this.$route.matched)
+				  console.log(this.$routes)
+				/*  
+				  {
+				  path: '/hello',
+				  name: 'HelloWorld',
+				  component: helloPage
+				  }
+				  跳转方式name
+				  this.$router.push({
+				  name: 'HelloWorld',
+				  query: {
+				  id: 12345
+				  }
+				  })
+				  跳转方式path
+				  this.$router.push({
+				  path: '/hello',
+				  query: {
+				  id: 12345
+				  }
+				  })
+				  *path路由跳转方式,params传参会被忽略，只能用name命名的方式跳转
+				  
+				  注意：params传参如果路由上面不写参数，也是可以传过去的，但不会在url上面显示出你的参数，并且当你跳到别的页面或者刷新页面的时候参数会丢失，要怎么解决？
+				  
+				  解决：一、传参字符串name小的时候，可以在路由后面加参数名/router1/:name 
+				  二、name大的时候用sessionStorage；（欢迎补充）
+				  
+				  注意：如果路由为动态路由{path: '/hello/:id',name:'hello'}
+				  路由跳转执行this.$router.push({name: 'hello',params: obj});obj里面只要有id属性，就会自动带到URL里面*/
+			  }
+			}).$mount('#app')
+			
+			// 现在，应用已经启动了！
+		</script>
+		
+		
+	</body>
+</html>
